@@ -46,16 +46,16 @@ uint64_t findX(const std::vector<std::string> &map)
 {
 	uint64_t result = 0;
 	
-	for(unsigned i=0; i<map.size(); i++)
+	for(unsigned i=1; i<map.size()-1; i++)
 	{
-		for(unsigned j=0; j<map[0].size(); j++)
+		for(unsigned j=1; j<map[0].size()-1; j++)
 		{
 			if(map[i][j] == 'A')
 			{
-				if(j>0 && j+1 < map[0].size() && i>0 && i+1 < map.size() && map[i-1][j-1] == 'M' && map[i+1][j+1] == 'S' && map[i+1][j-1] == 'M' && map[i-1][j+1] == 'S') result++;
-				else if(j>0 && j+1 < map[0].size() && i>0 && i+1 < map.size() && map[i-1][j-1] == 'S' && map[i+1][j+1] == 'M' && map[i+1][j-1] == 'M' && map[i-1][j+1] == 'S') result++;
-				else if(j>0 && j+1 < map[0].size() && i>0 && i+1 < map.size() && map[i-1][j-1] == 'S' && map[i+1][j+1] == 'M' && map[i+1][j-1] == 'S' && map[i-1][j+1] == 'M') result++;
-				else if(j>0 && j+1 < map[0].size() && i>0 && i+1 < map.size() && map[i-1][j-1] == 'M' && map[i+1][j+1] == 'S' && map[i+1][j-1] == 'S' && map[i-1][j+1] == 'M') result++;
+				if(map[i-1][j-1] == 'M' && map[i+1][j+1] == 'S' && map[i+1][j-1] == 'M' && map[i-1][j+1] == 'S') result++;
+				else if(map[i-1][j-1] == 'S' && map[i+1][j+1] == 'M' && map[i+1][j-1] == 'M' && map[i-1][j+1] == 'S') result++;
+				else if(map[i-1][j-1] == 'S' && map[i+1][j+1] == 'M' && map[i+1][j-1] == 'S' && map[i-1][j+1] == 'M') result++;
+				else if(map[i-1][j-1] == 'M' && map[i+1][j+1] == 'S' && map[i+1][j-1] == 'S' && map[i-1][j+1] == 'M') result++;
 			}
 		}
 	}
