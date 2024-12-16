@@ -2,7 +2,6 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include <deque>
 #include <utility>
 #include <unordered_set>
 
@@ -84,7 +83,7 @@ std::pair<uint64_t,uint64_t> traverseMap(std::vector<std::string> &map)
 	size_t goalX = map[0].size()-2;
 	size_t goalY = 1;
 
-	std::deque<Reindeer> openList;
+	std::vector<Reindeer> openList;
 	std::unordered_set<unsigned> closedList;
 
 	Reindeer reindeer;
@@ -103,8 +102,8 @@ std::pair<uint64_t,uint64_t> traverseMap(std::vector<std::string> &map)
 	
 	while(!openList.empty())
 	{
-		reindeer = openList.front();
-		openList.pop_front();
+		reindeer = openList.back();
+		openList.pop_back();
 
 		if(reindeer.x == goalX && reindeer.y == goalY)
 		{
@@ -197,12 +196,12 @@ std::pair<uint64_t,uint64_t> traverseMap(std::vector<std::string> &map)
 				{
 					if(closedList.count((newDeer.x*10000) + newDeer.y) == 0)
 					{
-						openList.push_back(newDeer);
+						openList.insert(openList.begin(), newDeer);
 					}
 				}
 			}
 		}
-		std::sort(openList.begin(), openList.end(), [](const Reindeer &aDeer, const Reindeer &bDeer){ return aDeer.cost < bDeer.cost; });
+		std::sort(openList.begin(), openList.end(), [](const Reindeer &aDeer, const Reindeer &bDeer){ return aDeer.cost > bDeer.cost; });
 	}
 	
 	for(auto &corners:winningDeer.corners)
