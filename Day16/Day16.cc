@@ -7,17 +7,17 @@
 
 struct Reindeer
 {
-	size_t x = 0;
-	size_t y = 0;
-	uint64_t cost = 0;
+	unsigned x = 0;
+	unsigned y = 0;
+	unsigned cost = 0;
 	unsigned direction = 0;
-	std::vector<std::vector<std::pair<size_t,size_t>>> corners;
+	std::vector<std::vector<std::pair<unsigned,unsigned>>> corners;
 };
 
 void parseInput(std::vector<std::string> &map)
 {
 	std::string line;
-  std::ifstream input("input.txt");
+  std::ifstream input("bigboy.txt");
 
   if(input.is_open())
   {
@@ -78,10 +78,10 @@ std::pair<uint64_t,uint64_t> traverseMap(std::vector<std::string> &map)
 {
 	std::pair<uint64_t,uint64_t> result = {0,0};
 	
-	size_t startX = 1;
-	size_t startY = map.size()-2;
-	size_t goalX = map[0].size()-2;
-	size_t goalY = 1;
+	unsigned startX = 1;
+	unsigned startY = map.size()-2;
+	unsigned goalX = map[0].size()-2;
+	unsigned goalY = 1;
 
 	std::vector<Reindeer> openList;
 	std::unordered_set<unsigned> closedList;
@@ -90,7 +90,7 @@ std::pair<uint64_t,uint64_t> traverseMap(std::vector<std::string> &map)
 	reindeer.x = startX;
 	reindeer.y = startY;
 	reindeer.direction = 1;
-	reindeer.corners.emplace_back(std::vector<std::pair<size_t,size_t>>());
+	reindeer.corners.emplace_back(std::vector<std::pair<unsigned,unsigned>>());
 	reindeer.corners[0].emplace_back(reindeer.x,reindeer.y);
 	openList.push_back(reindeer);
 	
@@ -185,7 +185,7 @@ std::pair<uint64_t,uint64_t> traverseMap(std::vector<std::string> &map)
 					{
 						for(auto &cornerList:newDeer.corners)
 						{
-							if(std::find_if(it->corners.begin(), it->corners.end(), [&cornerList](const std::vector<std::pair<size_t,size_t>> &cornerL){ return cornerList == cornerL; }) == std::end(it->corners))
+							if(std::find_if(it->corners.begin(), it->corners.end(), [&cornerList](const std::vector<std::pair<unsigned,unsigned>> &cornerL){ return cornerList == cornerL; }) == std::end(it->corners))
 							{
 								it->corners.push_back(cornerList);
 							}
