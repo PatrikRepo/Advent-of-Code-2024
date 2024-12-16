@@ -17,7 +17,7 @@ struct Reindeer
 void parseInput(std::vector<std::string> &map)
 {
 	std::string line;
-  std::ifstream input("bigboy.txt");
+  std::ifstream input("input.txt");
 
   if(input.is_open())
   {
