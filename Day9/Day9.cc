@@ -5,7 +5,7 @@
 void parseInput(std::vector<int64_t> &files)
 {
 	std::string line;
-  std::ifstream input("bigboy.txt");
+  std::ifstream input("input.txt");
 
   if(input.is_open())
   {	
